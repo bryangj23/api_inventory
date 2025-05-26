@@ -1,0 +1,631 @@
+openapi: 3.0.0
+info:
+  title: Inventory (API)
+  description: Service responsible for controlling the administration and management of products.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081
+paths:
+  /business-support/inventory/v1/products:
+    post:
+      tags:
+        - Product
+      operationId: createProduct
+      summary: Create product
+      description: Functionality that allows creating product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequestDto'
+        required: true
+      responses:
+        '201':
+          description: Created product successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ProductResponseDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      tags:
+        - Product
+      operationId: listProducts
+      summary: Get a list of products
+      description: Retrieve a paginated list of products with optional filters.
+      parameters:
+        - name: filters
+          in: query
+          required: false
+          description: Optional filters for the products.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Optional limit on the number of records to be returned.
+          schema:
+            type: integer
+            default: 20  # Default to 20
+        - name: offset
+          in: query
+          required: false
+          description: Page size for pagination.
+          schema:
+            type: integer
+            default: 0  # Default to first page
+        - name: sort
+          in: query
+          required: false
+          description: Sort the records by a parameter in ascending or descending order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval of list of products
+          headers:
+            count:
+              description: Total number of products.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponseDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /business-support/inventory/v1/products/{productId}:
+    put:
+      tags:
+        - Product
+      operationId: updateProduct
+      summary: Update products
+      description: Update of product.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequestDto'
+        required: true
+      responses:
+        '200':
+          description: Update product successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ProductResponseDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /business-support/inventory/v1/products/{productId}/users/{userId}:
+    delete:
+      tags:
+        - Product
+      operationId: deleteProduct
+      summary: Delete product
+      description: Delete product by ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+        - name: userId
+          in: path
+          required: true
+          description: ID user.
+          schema:
+            type: string
+            format: long
+      responses:
+        '204':
+          description: Deactivate product successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /business-support/inventory/v1/products/{productId}/product-movements:
+      post:
+        tags:
+          - ProductMovement
+        operationId: createProductMovement
+        summary: Create product movement
+        description: Functionality that allows creating product movement
+        parameters:
+          - name: productId
+            in: path
+            required: true
+            description: ID product.
+            schema:
+              type: string
+              format: long
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMovementRequestDto'
+          required: true
+        responses:
+          '201':
+            description: Created product movement successfully
+            content:
+              'application/json':
+                schema:
+                  $ref: '#/components/schemas/ProductMovementResponseDto'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+      get:
+        tags:
+          - ProductMovement
+        operationId: listProductMovements
+        summary: Get a list of product movements
+        description: Retrieve a paginated list of product movements with optional filters.
+        parameters:
+          - name: productId
+            in: path
+            required: true
+            description: ID product.
+            schema:
+              type: string
+              format: long
+          - name: filters
+            in: query
+            required: false
+            description: Optional filters for the product movements.
+            schema:
+              type: string
+          - name: limit
+            in: query
+            required: false
+            description: Optional limit on the number of records to be returned.
+            schema:
+              type: integer
+              default: 20  # Default to 20
+          - name: offset
+            in: query
+            required: false
+            description: Page size for pagination.
+            schema:
+              type: integer
+              default: 0  # Default to first page
+          - name: sort
+            in: query
+            required: false
+            description: Sort the records by a parameter in ascending or descending order.
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Successful retrieval of list of product movements
+            headers:
+              count:
+                description: Total number of product movements.
+                schema:
+                  type: integer
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductMovementResponseDto'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+  /business-support/inventory/v1/products/{productId}/product-movements/{productMovementId}:
+    put:
+      tags:
+        - ProductMovement
+      operationId: updateProductMovement
+      summary: Update product movements
+      description: Update of product movement.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+        - name: productMovementId
+          in: path
+          required: true
+          description: ID product movement.
+          schema:
+            type: string
+            format: long
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductMovementRequestDto'
+        required: true
+      responses:
+        '200':
+          description: Update product movement successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ProductMovementResponseDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /business-support/inventory/v1/products/{productId}/product-movements/{productMovementId}/users/{userId}:
+    delete:
+      tags:
+        - ProductMovement
+      operationId: deleteProductMovement
+      summary: Delete product
+      description: Delete product by ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+        - name: productMovementId
+          in: path
+          required: true
+          description: ID product movement.
+          schema:
+            type: string
+            format: long
+        - name: userId
+          in: path
+          required: true
+          description: ID user.
+          schema:
+            type: string
+            format: long
+      responses:
+        '204':
+          description: Deactivate product movement successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    BadRequest:
+      description: 'Solicitud incorrecta'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HeaderEntityError'
+    Unauthorized:
+      description: 'No autorizado'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/401Response'
+    Forbidden:
+      description: 'Acceso prohibido'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/403Response'
+    NotFound:
+      description: 'No encontrado'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/404Response'
+  schemas:
+    ProductRequestDto:
+      type: object
+      required:
+        - name
+        - quantity
+        - userId
+      properties:
+        name:
+          type: string
+        quantity:
+          type: integer
+        userId:
+          type: integer
+        description:
+          type: string
+    ProductResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity:
+          type: integer
+        registeredByUserId:
+          type: number
+          format: long
+        modifiedByUserId:
+          type: number
+          format: long
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ProductMovementResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        productId:
+          type: integer
+        movementType:
+          type: string
+          enum:
+            - INPUT
+            - OUTPUT
+        quantity:
+          type: integer
+        userId:
+          type: integer
+        description:
+          type: string
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ProductMovementRequestDto:
+      type: object
+      required:
+        - movementType
+        - quantity
+        - userId
+      properties:
+        movementType:
+          type: string
+          enum:
+            - INPUT
+            - OUTPUT
+        quantity:
+          type: integer
+        userId:
+          type: integer
+        description:
+          type: string
+    401Response:
+      description: 'No autorizado'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '40100'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'No autorizado'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        entityTypeName:
+          type: string
+          example: 'PaymentOrderInitiateRequestDto'
+          description: 'Modelo en el que el error fue encontrado'
+        status:
+          type: integer
+          example: 401
+          description: 'Código HTTP con el que se respondió a la petición'
+    403Response:
+      description: 'Acceso prohibido'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '40300'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Acceso prohibido'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        entityTypeName:
+          type: string
+          example: 'PaymentOrderInitiateRequestDto'
+          description: 'Modelo en el que el error fue encontrado'
+        status:
+          type: integer
+          example: 403
+          description: 'Código HTTP con el que se respondió a la petición'
+    404Response:
+      description: 'URL inválida'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '40400'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Url inválida'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        entityTypeName:
+          type: string
+          example: 'PaymentOrderInitiateRequestDto'
+          description: 'Modelo en el que el error fue encontrado'
+        status:
+          type: integer
+          example: 404
+          description: 'Código HTTP con el que se respondió a la petición'
+    415Response:
+      description: 'tipo de dato del body distinto de application/json'
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'El Content-Type no se encuentra soportado'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        status:
+          type: integer
+          example: 415
+          description: 'Código HTTP con el que se respondió a la petición'
+    422Response:
+      type: object
+      properties:
+        entityTypeName:
+          type: string
+          example: "PaymentOrderExecuteRequestDto"
+          description: 'Modelo en el que el error fue encontrado'
+        validation:
+          type: array
+          items:
+            $ref: '#/components/schemas/Validation'
+        message:
+          type: string
+          example: "Error in Dto"
+          description: 'Mensaje que indica el error general encontrado'
+        code:
+          type: string
+          example: "422000"
+        status:
+          type: integer
+          example: 422
+    HeaderEntityError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+          description: 'Código HTTP con el que se respondió a la petición'
+        entityTypeName:
+          type: string
+          example: Headers
+        message:
+          type: string
+          example: "El encabezado es requerido"
+        code:
+          type: string
+          example: '40000'
+          description: 'Código de negocio asociado al error encontrado'
+    Validation:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: "Campo donde el error fue encontrado"
+          example: "entity.value"
+    500Response:
+      description: 'Error interno'
+      type: object
+      properties:
+        code:
+          type: string
+          example: "50000"
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Ha ocurrido un error inesperado al procesar la solicitud'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        status:
+          type: integer
+          example: 500
+          description: 'Código HTTP con el que se respondió a la petición'
+    502Response:
+      description: 'Puerta de entrada erronea'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '50200'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Bad Gateway'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        status:
+          type: integer
+          example: 502
+          description: 'Código HTTP con el que se respondió a la petición'
+    503Response:
+      description: 'Servicio no disponible'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '50300'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Service Unavailable'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        status:
+          type: integer
+          example: 503
+          description: 'Código HTTP con el que se respondió a la petición'
+    504Response:
+      description: 'Tiempo de espera agotado'
+      type: object
+      properties:
+        code:
+          type: string
+          example: '50400'
+          description: 'Código de negocio asociado al error encontrado'
+        message:
+          type: string
+          example: 'Gateway Timeout'
+          description: 'Mensaje legible que representa el estado del resultado del servicio'
+        status:
+          type: integer
+          example: 504
+          description: 'Código HTTP con el que se respondió a la petición'
