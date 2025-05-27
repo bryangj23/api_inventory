@@ -1,5 +1,67 @@
 # 📦 api-inventory
 The api-inventory microservice is part of the system's distributed architecture and is responsible for managing products.
+Available Endpoints
+
+🔐 Product
+
+- GET /products
+
+Retrieves a paginated list of products with optional filtering support.
+![img.png](img.png)
+
+- GET /products/{productId}
+
+Get product by ID.
+![img_1.png](img_1.png)
+
+- POST /products
+
+Creates a new product using the data provided in the request body.
+![img_2.png](img_2.png)
+
+
+- PUT /products/{productId}
+
+Updates an existing product identified by its ID.
+![img_3.png](img_3.png)
+
+
+- DELETE /products/{productId}/users/{userId}
+
+Deletes a product from the system (irreversible operation).
+![img_4.png](img_4.png)
+
+
+👤 Product Movement
+
+- GET /products/{productId}/product-movements
+
+Retrieves a paginated list of registered product movement with filtering support.
+![img_5.png](img_5.png)
+
+
+- GET /products/{productId}/product-movements/{productMovementId}
+
+Retrieves detailed information of a specific product movement by their ID.
+![img_6.png](img_6.png)
+
+- POST /products/{productId}/product-movements
+
+Creates a new product movement with input validations.
+![img_7.png](img_7.png)
+
+
+- PUT /products/{productId}/product-movements/{productMovementId}
+
+Partially updates the data of an existing product movement.
+![img_8.png](img_8.png)
+
+
+- DELETE /products/{productId}/product-movements/{productMovementId}/users/{userId}
+
+Deactivates a product movement (the user is not physically removed, just marked as inactive).
+![img_9.png](img_9.png)
+
 
 ## 🧰 Technologies Used
 
