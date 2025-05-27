@@ -2,9 +2,11 @@ package com.nexos.api_inventory.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nexos.api_inventory.dto.user.role.RoleResponseDto;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 
+@Builder
 public record UserResponseDto(
        Long id,
        String userNumber,

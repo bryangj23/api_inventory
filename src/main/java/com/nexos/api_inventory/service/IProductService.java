@@ -15,7 +15,7 @@ public interface IProductService {
 
     Product getById(Long id) throws BaseError;
 
-    void save(Product product) throws BaseError;
+    Product save(Product product) throws BaseError;
 
     ProductResponseDto create(ProductRequestDto request)  throws BaseError;
 

@@ -51,8 +51,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void save(Product product) throws BaseError {
-        productRepository.save(product);
+    public Product save(Product product) throws BaseError {
+        return productRepository.save(product);
     }
 
     @Override

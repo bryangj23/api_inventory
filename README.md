@@ -38,6 +38,8 @@ The code is organized as follows:
 - DB_SCHEMA: Database schema.
 - DB_USER: Database user.
 - DB_PASS: Database password.
+
+**Service environment variable**
 - API_USER_HOST: User api host.
 
 

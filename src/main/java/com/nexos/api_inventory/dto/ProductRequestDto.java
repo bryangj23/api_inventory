@@ -1,7 +1,9 @@
 package com.nexos.api_inventory.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 
+@Builder
 public record ProductRequestDto(
         @NotBlank(message = "{common.error.str.exact.size}")
         @Size(max = 25, message = "{error.product.name.size}")
