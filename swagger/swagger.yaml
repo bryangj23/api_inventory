@@ -90,6 +90,35 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   /business-support/inventory/v1/products/{productId}:
+    get:
+      tags:
+        - Product
+      operationId: getOneProduct
+      summary: Get one product
+      description: Get product by ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+      responses:
+        '200':
+          description: Successful get product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponseDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
     put:
       tags:
         - Product
@@ -257,6 +286,42 @@ paths:
           '404':
             $ref: '#/components/responses/NotFound'
   /business-support/inventory/v1/products/{productId}/product-movements/{productMovementId}:
+    get:
+      tags:
+        - ProductMovement
+      operationId: getOneProductMovement
+      summary: Get one product movement
+      description: Get product movement by ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID product.
+          schema:
+            type: string
+            format: long
+        - name: productMovementId
+          in: path
+          required: true
+          description: ID product movement.
+          schema:
+            type: string
+            format: long
+      responses:
+        '200':
+          description: Successful get product movement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMovementRequestDto'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
     put:
       tags:
         - ProductMovement
