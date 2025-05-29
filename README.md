@@ -7,29 +7,34 @@ Available Endpoints
 - GET /products
 
 Retrieves a paginated list of products with optional filtering support.
-![img.png](img.png)
+![image](https://github.com/user-attachments/assets/4adda746-ede9-41a8-a011-3e1bf8abfa29)
+
 
 - GET /products/{productId}
 
 Get product by ID.
-![img_1.png](img_1.png)
+![image](https://github.com/user-attachments/assets/f8f7083c-3c15-42b2-913f-0951e7adbbc0)
+
 
 - POST /products
 
 Creates a new product using the data provided in the request body.
-![img_2.png](img_2.png)
+![image](https://github.com/user-attachments/assets/8726f3e4-f968-41fe-b5a6-6ff9dd7e73d7)
+
 
 
 - PUT /products/{productId}
 
 Updates an existing product identified by its ID.
-![img_3.png](img_3.png)
+![image](https://github.com/user-attachments/assets/6f7229e6-4608-4095-8037-fa2c630f9eaa)
+
 
 
 - DELETE /products/{productId}/users/{userId}
 
 Deletes a product from the system (irreversible operation).
-![img_4.png](img_4.png)
+![image](https://github.com/user-attachments/assets/d56df743-3c3a-4a19-9c04-d6996f68099f)
+
 
 
 👤 Product Movement
@@ -37,30 +42,35 @@ Deletes a product from the system (irreversible operation).
 - GET /products/{productId}/product-movements
 
 Retrieves a paginated list of registered product movement with filtering support.
-![img_5.png](img_5.png)
+![image](https://github.com/user-attachments/assets/50a15f7f-deef-404d-9f0f-8935f124ffa1)
+
 
 
 - GET /products/{productId}/product-movements/{productMovementId}
 
 Retrieves detailed information of a specific product movement by their ID.
-![img_6.png](img_6.png)
+![image](https://github.com/user-attachments/assets/3dacc61a-8be7-45ae-a7f7-b1d5bb202d6c)
+
 
 - POST /products/{productId}/product-movements
 
 Creates a new product movement with input validations.
-![img_7.png](img_7.png)
+![image](https://github.com/user-attachments/assets/c508807f-057b-4b7e-9a81-364280fa5cb7)
+
 
 
 - PUT /products/{productId}/product-movements/{productMovementId}
 
 Partially updates the data of an existing product movement.
-![img_8.png](img_8.png)
+![image](https://github.com/user-attachments/assets/edad792d-cef6-443d-96e0-b246979daa07)
+
 
 
 - DELETE /products/{productId}/product-movements/{productMovementId}/users/{userId}
 
 Deactivates a product movement (the user is not physically removed, just marked as inactive).
-![img_9.png](img_9.png)
+![Uploading image.png…]()
+
 
 
 ## 🧰 Technologies Used
