@@ -69,7 +69,8 @@ Partially updates the data of an existing product movement.
 - DELETE /products/{productId}/product-movements/{productMovementId}/users/{userId}
 
 Deactivates a product movement (the user is not physically removed, just marked as inactive).
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/d8b3b401-ebe6-4d58-9f59-b25e940c4729)
+
 
 
 
